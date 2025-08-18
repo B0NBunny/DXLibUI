@@ -2334,7 +2334,7 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
 
             function Groupbox:AddKeybindButton( params )
                 local KeybindButton = {}
-                local Name = params.Text or params.Name or params.Index
+                local Name = params.Text or params.Index
                 local Index = params.Index or Name
                 
                 --// Error Handling
