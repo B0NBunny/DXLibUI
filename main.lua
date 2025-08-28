@@ -1065,26 +1065,27 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                     end
 
                     function Button:AddTooltip(str)
-                        local n = 0; -- Line Count
-                        local Tooltip = "";
+                        if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
+                            local n = 0; -- Line Count
+                            local Tooltip = "";
 
-                        if string.gmatch(str, "([^\n]+)") ~= nil then
-                            for i in (string.gmatch(str, "([^\n]+)")) do
-                                Tooltip = Tooltip..i.."\n"
-                                n = n + 1
+                            if string.gmatch(str, "([^\n]+)") ~= nil then
+                                for i in (string.gmatch(str, "([^\n]+)")) do
+                                    Tooltip = Tooltip..i.."\n"
+                                    n = n + 1
+                                end
+                            else
+                                Tooltip = str
+                                n = 1
                             end
-                        else
-                            Tooltip = str
-                            n = 1
+
+                            if Button.Hovering then
+                                dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
+                                dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
+
+                                dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
+                            end
                         end
-
-                        if Button.Hovering then
-                            dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
-                            dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
-
-                            dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
-                        end
-
                         return Button
                     end
                 end
@@ -1155,31 +1156,32 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 end
 
                 function Picker:Hide()
-                    Win.OpenTool = nil 
+                    Win.OpenTool = nil
                     Win.DeadZone = nil
                 end
 
                 function Picker:AddTooltip(str)
-                    local n = 0; -- Line Count
-                    local Tooltip = "";
+                    if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
+                        local n = 0; -- Line Count
+                        local Tooltip = "";
 
-                    if string.gmatch(str, "([^\n]+)") ~= nil then
-                        for i in (string.gmatch(str, "([^\n]+)")) do
-                            Tooltip = Tooltip..i.."\n"
-                            n = n + 1
+                        if string.gmatch(str, "([^\n]+)") ~= nil then
+                            for i in (string.gmatch(str, "([^\n]+)")) do
+                                Tooltip = Tooltip..i.."\n"
+                                n = n + 1
+                            end
+                        else
+                            Tooltip = str
+                            n = 1
                         end
-                    else
-                        Tooltip = str
-                        n = 1
+
+                        if Picker.Hovering then
+                            dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
+                            dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
+
+                            dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
+                        end
                     end
-
-                    if Picker.Hovering then
-                        dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
-                        dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
-
-                        dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
-                    end
-
                     return Picker
                 end
 
@@ -1615,26 +1617,27 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 end
 
                 function TextBox:AddTooltip(str)
-                    local n = 0; -- Line Count
-                    local Tooltip = "";
+                    if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
+                        local n = 0; -- Line Count
+                        local Tooltip = "";
 
-                    if string.gmatch(str, "([^\n]+)") ~= nil then
-                        for i in (string.gmatch(str, "([^\n]+)")) do
-                            Tooltip = Tooltip..i.."\n"
-                            n = n + 1
+                        if string.gmatch(str, "([^\n]+)") ~= nil then
+                            for i in (string.gmatch(str, "([^\n]+)")) do
+                                Tooltip = Tooltip..i.."\n"
+                                n = n + 1
+                            end
+                        else
+                            Tooltip = str
+                            n = 1
                         end
-                    else
-                        Tooltip = str
-                        n = 1
+
+                        if TextBox.Hovering then
+                            dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
+                            dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
+
+                            dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
+                        end
                     end
-
-                    if TextBox.Hovering then
-                        dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
-                        dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
-
-                        dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
-                    end
-
                     return TextBox
                 end
 
@@ -1768,7 +1771,7 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 assert(type(Values) == "table" and #Values > 0, "[ERROR] AddDropdown: Values argument must be a table larger than 0!")
                 
                 if Groupbox.Tools[Index] == nil then
-                    Dropdown = { 
+                    Dropdown = {
                         Name = Name;
                         Boundary = { 0 , 0 , 0 , 0 };
                         Holding = false;
@@ -1818,22 +1821,19 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 end
 
                 function Dropdown:Hide()
-                    Win.OpenTool = nil 
+                    Win.OpenTool = nil
                     Win.DeadZone = nil
                 end
-
         
                 --// Draw Dropdown in Groupbox
                 if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
-
-
                     --// Trimming Text
                     local TrimmedText = Name;
                     if dx9.CalcTextWidth(TrimmedText) >=  Groupbox.Size[1] - 20 then 
                         repeat
                             TrimmedText = TrimmedText:sub(1,-2)
                         until dx9.CalcTextWidth(TrimmedText) <= Groupbox.Size[1] - 20
-                    end                    
+                    end
 
                     --// Calculating button X size
                     local dropdown_x = dx9.CalcTextWidth(TrimmedText) + 7
@@ -1965,8 +1965,10 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                         Dropdown.Hovering = false;
                         Dropdown.Holding = false;
                     end
+                end
 
-                    function Dropdown:AddTooltip(str)
+                function Dropdown:AddTooltip(str)
+                    if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
                         local n = 0; -- Line Count
                         local Tooltip = "";
 
@@ -1986,9 +1988,8 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
 
                             dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
                         end
-
-                        return Dropdown
                     end
+                    return Dropdown
                 end
 
                 --// Dropdown Onchanged
@@ -2132,8 +2133,19 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                         Slider.Hovering = false;
                         Slider.Holding = false;
                     end
+                end
 
-                    function Slider:AddTooltip(str)
+                --// Slider OnChanged
+                function Slider:OnChanged( func )
+                    if Slider.Changed then
+                        Slider.Changed = false
+                        func(Slider.Value)
+                    end
+                    return Slider;
+                end
+
+                function Slider:AddTooltip(str)
+                    if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
                         local n = 0; -- Line Count
                         local Tooltip = "";
 
@@ -2153,18 +2165,8 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
 
                             dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
                         end
-
-                        return Slider
                     end
-                end
-
-                --// Slider OnChanged
-                function Slider:OnChanged( func )
-                    if Slider.Changed then
-                        Slider.Changed = false
-                        func(Slider.Value)
-                    end
-                    return Slider;
+                    return Slider
                 end
 
                 --// Closing Difines and Resets | Slider
@@ -2300,8 +2302,19 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                         Toggle.Hovering = false;
                         Toggle.Holding = false;
                     end
+                end
 
-                    function Toggle:AddTooltip(str)
+                --// Toggle Onchanged
+                function Toggle:OnChanged( func )
+                    if Toggle.Changed then
+                        Toggle.Changed = false
+                        func(Toggle.Value)
+                    end
+                    return Toggle;
+                end
+
+                function Toggle:AddTooltip(str)
+                    if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
                         local n = 0; -- Line Count
                         local Tooltip = "";
 
@@ -2321,18 +2334,8 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
 
                             dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
                         end
-
-                        return Toggle
                     end
-                end
-
-                --// Toggle Onchanged
-                function Toggle:OnChanged( func )
-                    if Toggle.Changed then
-                        Toggle.Changed = false
-                        func(Toggle.Value)
-                    end
-                    return Toggle;
+                    return Toggle
                 end
 
                 --// Closing Difines and Resets | Toggle
@@ -2393,30 +2396,6 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 function KeybindButton:SetText( newText )
                     assert(type(newText) == "string", "[ERROR] KeybindButton:SetText(newText) - newText must be a string!")
                     KeybindButton.Text = newText;
-                end
-
-                function KeybindButton:AddTooltip(str)
-                    local n = 0; -- Line Count
-                    local Tooltip = "";
-
-                    if string.gmatch(str, "([^\n]+)") ~= nil then
-                        for i in (string.gmatch(str, "([^\n]+)")) do
-                            Tooltip = Tooltip..i.."\n"
-                            n = n + 1
-                        end
-                    else
-                        Tooltip = str
-                        n = 1
-                    end
-
-                    if KeybindButton.Hovering then
-                        dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
-                        dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
-
-                        dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
-                    end
-
-                    return KeybindButton
                 end
                 
                 local ButtonText = type(KeybindButton.Text) == "string" and KeybindButton.Text or tostring(KeybindButton.Text)
@@ -2500,6 +2479,31 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                         func(KeybindButton.Key)
                     end
                     return KeybindButton;
+                end
+
+                function KeybindButton:AddTooltip(str)
+                    if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
+                        local n = 0; -- Line Count
+                        local Tooltip = "";
+
+                        if string.gmatch(str, "([^\n]+)") ~= nil then
+                            for i in (string.gmatch(str, "([^\n]+)")) do
+                                Tooltip = Tooltip..i.."\n"
+                                n = n + 1
+                            end
+                        else
+                            Tooltip = str
+                            n = 1
+                        end
+
+                        if KeybindButton.Hovering then
+                            dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
+                            dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
+
+                            dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
+                        end
+                    end
+                    return KeybindButton
                 end
 
                 --// Closing Difines and Resets | KeybindButton
