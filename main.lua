@@ -2061,7 +2061,7 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
 
                     --// Bar Defs
-                    local temp = Slider.Value..Slider.Suffix.."/"..params.Max..Slider.Suffix
+                    local temp = tostring(Slider.Value)..Slider.Suffix.."/"..tostring(params.Max)..Slider.Suffix
                     local bar_length = Groupbox.Size[1] - 14
 
                     local val = ( 1 / ( ( params.Max - params.Min ) / (Slider.Value - params.Min) )  )
