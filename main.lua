@@ -1159,6 +1159,30 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                     Win.DeadZone = nil
                 end
 
+                function Picker:AddTooltip(str)
+                    local n = 0; -- Line Count
+                    local Tooltip = "";
+
+                    if string.gmatch(str, "([^\n]+)") ~= nil then
+                        for i in (string.gmatch(str, "([^\n]+)")) do
+                            Tooltip = Tooltip..i.."\n"
+                            n = n + 1
+                        end
+                    else
+                        Tooltip = str
+                        n = 1
+                    end
+
+                    if Picker.Hovering then
+                        dx9.DrawFilledBox({Mouse.x - 1, Mouse.y + 1}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 5, Mouse.y - (18 * n) - 1}, Win.AccentColor)
+                        dx9.DrawFilledBox({Mouse.x, Mouse.y}, {Mouse.x + dx9.CalcTextWidth(Tooltip) + 4, Mouse.y - (18 * n)}, Win.OutlineColor)
+
+                        dx9.DrawString({Mouse.x + 2, Mouse.y - (18 * n)}, Win.FontColor, str)
+                    end
+
+                    return Picker
+                end
+
                 --// Draw Color Picker in Groupbox
                 if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
 
@@ -2334,7 +2358,7 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
 
             function Groupbox:AddKeybindButton( params )
                 local KeybindButton = {}
-                local Name = params.Text or params.Name or params.Index
+                local Name = params.Text or params.Index
                 local Index = params.Index or Name
                 
                 --// Error Handling
