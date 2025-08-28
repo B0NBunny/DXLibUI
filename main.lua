@@ -1789,9 +1789,12 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 --// Re-Setting Values
                 Dropdown = Groupbox.Tools[Index]
 
-                --// Setting / clearing values
-                if Dropdown.ValueIndex > #Dropdown.Values then Dropdown.ValueIndex = #Dropdown.Values end
-                if Dropdown.Values[Dropdown.ValueIndex] ~= nil then Dropdown.Value = Dropdown.Values[Dropdown.ValueIndex] end
+                --// Set Values
+                function Dropdown:SetValues( table )
+                    if type(table) == "table" and #table > 0 then
+                        Dropdown.Values = table
+                    end
+                end
 
                 --// Set Value
                 function Dropdown:SetValue( value ) -- CHANGE
@@ -1805,12 +1808,9 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                     if Dropdown.Values[tonumber(value)] then Dropdown.ValueIndex = tonumber(value) end
                 end
 
-                --// Set Values
-                function Dropdown:SetValues( table )
-                    if type(table) == "table" and #table > 0 then
-                        Dropdown.Values = table
-                    end
-                end
+                --// Setting / clearing values
+                if Dropdown.ValueIndex > #Dropdown.Values then Dropdown.ValueIndex = #Dropdown.Values end
+                if Dropdown.Values[Dropdown.ValueIndex] ~= nil then Dropdown.Value = Dropdown.Values[Dropdown.ValueIndex] end
 
                 --// Picker Show / Hide
                 function Dropdown:Show()
